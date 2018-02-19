@@ -1,0 +1,15 @@
+<div id="modal-dialog" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+        </div>
+        <div class="modal-body text-center">
+            <ng-container>Are you sure you would like to remove <strong>{{ objectToRemove.obj.name }}</strong>?</ng-container>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="yes()">Yes</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" (click)="cancel()">Canel</button>
+        </div>
+        </div>
+    </div>
+</div>

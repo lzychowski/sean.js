@@ -1,0 +1,167 @@
+    
+    <div class="row">
+        <!-- col -->
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+
+                <!-- PAGE HEADER -->
+                <i class="fa-fw fa fa-arrow-left"></i>
+                <a href="#/users">Users</a>
+                <span *ngIf="user">
+                    /  {{ user.first_name }} {{ user.last_name }}
+                </span>
+            </h1>
+        </div>
+        <!-- end col -->
+    </div>
+
+    <!-- end row -->
+
+    <section *ngIf="user" id="widget-grid">
+        <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-6 sortable-grid ui-sortable">
+
+                <!-- user info -->
+
+                <div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" id="wid-id-1" 
+                data-widget-editbutton="false" 
+                data-widget-fullscreenbutton="false" 
+                data-widget-sortable="true"
+                role="widget">
+                
+                    <header role="heading" class="ui-sortable-handle">
+                        <span class="widget-icon"> <i class="fa fa-user txt-color-white"></i> </span>
+                        <h2> User Information </h2>
+                        <div class="widget-toolbar" role="menu">
+                            <!-- add: non-hidden - to disable auto hide -->
+            
+                            
+                        </div>
+                    <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
+            
+                    <!-- widget div-->
+                    <div role="content">
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <div>
+                                <label>Title:</label>
+                                <input type="text">
+                            </div>
+                        </div>
+                        <!-- end widget edit box -->
+            
+                        <div class="widget-body">
+                            <div class="dl-horizontal" style="margin-top: 20px;">
+                                <dt>Email Address</dt>
+                                <dd>{{ user.email_address }}</dd>
+                                <dt>First Name</dt>
+                                <dd>{{ user.first_name }}</dd>
+                                <dt>Last Name</dt>
+                                <dd>{{ user.last_name }}</dd>
+                            </div>
+                        </div>
+            
+                    </div>
+                    <!-- end widget div -->
+                </div>
+
+                <!-- groups -->
+
+                <div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" id="wid-id-1" 
+                data-widget-editbutton="false" 
+                data-widget-fullscreenbutton="false" 
+                data-widget-sortable="true"
+                role="widget">
+                
+                    <header role="heading" class="ui-sortable-handle">
+                        <span class="widget-icon"> <i class="fa fa-cubes txt-color-white"></i> </span>
+                        <h2> User Groups </h2>
+                        <div class="widget-toolbar" role="menu">
+                            <!-- add: non-hidden - to disable auto hide -->
+            
+                            
+                        </div>
+                    <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
+            
+                    <!-- widget div-->
+                    <div role="content">
+            
+                        <div class="widget-body widget-hide-overflow no-padding" style="min-height: 0px;">
+                            <div class="table table-striped" *ngIf="groups" style="margin-bottom: 0px;">
+                                <table class="table table-bordered" style="margin-bottom: 0px;">
+                                    <tbody>
+                                        <tr *ngFor="let group of groups;">
+                                            <td style="text-align: center; width: 5%"><a href="javascript: void(0)" (click)="removeGroup(group)"> <i class="fa fa-times"></i></a>  </td>
+                                            <td>{{ group.name }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div *ngIf="!groups || groups.length === 0" style="padding: 5px 0 5px 15px;"> This user does not belong to any groups.</div>
+                            </div>
+
+                            <div class="widget-footer">
+                                <button class="btn btn-sm btn-primary" type="button">
+                                    <i class="fa fa-refresh fa-plus"></i> Assign Group
+                                </button>
+                            </div>
+                        </div>
+            
+                    </div>
+                    <!-- end widget div -->
+                </div>
+
+                <!-- scopes -->
+
+                <div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" id="wid-id-1" 
+                data-widget-editbutton="false" 
+                data-widget-fullscreenbutton="false" 
+                data-widget-sortable="true"
+                role="widget">
+                
+                    <header role="heading" class="ui-sortable-handle">
+                        <span class="widget-icon"> <i class="fa fa-cube txt-color-white"></i> </span>
+                        <h2> User Scopes </h2>
+                        <div class="widget-toolbar" role="menu">
+                            <!-- add: non-hidden - to disable auto hide -->
+            
+                            
+                        </div>
+                    <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
+            
+                    <!-- widget div-->
+                    <div role="content">
+            
+                        <div class="widget-body widget-hide-overflow no-padding" style="min-height: 0px;">
+                            <div class="table table-striped" *ngIf="scopes" style="margin-bottom: 0px;">
+                                <table class="table table-bordered" style="margin-bottom: 0px;">
+                                    <tbody>
+                                        <tr *ngFor="let scope of scopes;">
+                                            <td style="text-align: center; width: 5%"><a href="javascript: void(0)" (click)="removeScope(scope)"> <i class="fa fa-times"></i></a>  </td>
+                                            <td>{{ scope.name }}</td>
+                                        </tr>
+                                    </tbody>
+                                    <div *ngIf="!scopes || scopes.length === 0" style="padding: 5px 0 5px 15px;"> This user does have any scopes assigned.</div>
+                                </table>
+                            </div>
+
+                            <div class="widget-footer">
+                                <button class="btn btn-sm btn-primary" type="button">
+                                    <i class="fa fa-refresh fa-plus"></i> Assign Scope
+                                </button>
+                            </div>
+                        </div>
+            
+                    </div>
+                    <!-- end widget div -->
+                </div>
+            </article>
+        </div>
+        
+    </section>
+
+    <app-modal
+    *ngIf="modal"
+    [objectToRemove]="objectToRemove"
+    (confirm)="confirmModal($event)"
+    >
+    </app-modal>
