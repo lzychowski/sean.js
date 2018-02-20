@@ -4,10 +4,12 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "npm run build-dev && node ./bin/www",
+    "start-dev": "npm run build-dev && node ./bin/www",
+    "start-local": "npm run build-local && node ./bin/www",
     "ng:start": "ng build && node ./bin/www",
     "build": "webpack",
     "build-dev": "rimraf dist && webpack --config config/webpack.dev.js --bail",
+    "build-local": "rimraf dist && webpack --config config/webpack.local.js --bail",
     "test": "karma start ./karma.conf.js",
     "lint": "ng lint",
     "e2e": "protractor ./protractor.conf.js",

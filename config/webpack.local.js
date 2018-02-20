@@ -28,7 +28,7 @@ module.exports = webpackMerge(commonConfig, {
               {
                   pattern: /api_server/g,
                   replacement: function (match, p1, offset, string) {
-                      return "http://auth0.digitalpasture.com";
+                      return "http://localhost";
                   }
               }
           ]})
