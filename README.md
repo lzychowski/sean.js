@@ -13,7 +13,7 @@ This project contains an API as well as an administrative interface that allows 
 2. Run `npm install`.
 3. Obtain `.env` file from the project owner and chagne `DB_*` configuration.
 4. Run `/sql/bootstrap.sql` in your PostgreSQL database.
-5. Run `npm start`; WebPack will build Angular2 project and node will serve up the application at `http://localhost:3000/`.
+5. Run `npm start-local` for a local environment; WebPack will build Angular2 project and node will serve up the application at `http://localhost/`.
 
 ## Stack
 

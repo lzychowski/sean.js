@@ -78,7 +78,7 @@ router.post('/:id/groups/:group_id', function (req, res, next) {
         { raw: true, replacements: [ req.params.id, req.params.group_id ]}
     )
     .then(data => {
-        res.send(data);
+        res.send({ message: "sucess"});
     })
     .catch(e =>{
         throw e;
@@ -92,7 +92,7 @@ router.post('/:id/scopes/:scope_id', function (req, res, next) {
         { raw: true, replacements: [ req.params.id, req.params.scope_id ]}
     )
     .then(data => {
-        res.send(data);
+        res.send({ message: "sucess"});
     })
     .catch(e =>{
         throw e;
@@ -106,7 +106,7 @@ router.put('/groups/:id', function (req, res, next) {
         { raw: true, replacements: [ req.params.id ]}
     )
     .then(data => {
-        res.send(data);
+        res.send({ message: "sucess"});
     })
     .catch(e =>{
         throw e;
@@ -120,7 +120,7 @@ router.put('/scopes/:id', function (req, res, next) {
         { raw: true, replacements: [ req.params.id ]}
     )
     .then(data => {
-        res.send(data);
+        res.send({ message: "sucess"});
     })
     .catch(e =>{
         throw e;
@@ -143,7 +143,7 @@ router.post('/:id/groups', function (req, res, next) {
         { raw: true, replacements: [ req.params.id, groups ]}
     )
     .then(data => {
-        res.send(data);
+        res.send({ message: "sucess"});
     })
     .catch(e =>{
         throw e;
@@ -166,7 +166,7 @@ router.post('/:id/scopes', function (req, res, next) {
         { raw: true, replacements: [ req.params.id, scopes ]}
     )
     .then(data => {
-        res.send(data);
+        res.send({ message: "sucess"});
     })
     .catch(e =>{
         throw e;
