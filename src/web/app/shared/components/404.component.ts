@@ -10,6 +10,8 @@ import {
     ViewChild, ViewChildren 
 } from '@angular/core';
 
+declare var $: any;
+
 @Component({
     selector: 'app-404',
     templateUrl: '../templates/404.component.html'
@@ -26,5 +28,6 @@ export class NotFoundComponent {
 
     constructor(){
         console.log("constructor");
+        $("#scrim-main").fadeOut(100);
     }
 }
