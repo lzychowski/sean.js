@@ -49,8 +49,14 @@ export class BaseService<Type> {
         .catch(this.handleError);
     }
 
-    protected post(url: string, options?: RequestOptionsArgs): Promise<Type> {
+    protected post(url: string, body?: any): Promise<Type> {
         console.log("post");
+
+        let options = new RequestOptions();
+
+        if (body){
+            options.body = body;
+        }
 
         return this.http.post(url, this.buildBody(options), options)
         .toPromise()
@@ -58,8 +64,14 @@ export class BaseService<Type> {
         .catch(this.handleError);
     }
 
-    protected put(url: string, options?: RequestOptionsArgs): Promise<Type> {
+    protected put(url: string, body?: any): Promise<Type> {
         console.log("put");
+
+        let options = new RequestOptions();
+
+        if (body){
+            options.body = body;
+        }
 
         return this.http.put(url, this.buildBody(options), options)
         .toPromise()

@@ -18,9 +18,10 @@ import { BaseComponent } from '../../shared/components/base.component';
 declare var $: any;
 declare var setup_widgets_desktop: any;
 
+
 @Component({
-    selector: 'app-user',
-    templateUrl: '../templates/users.component.html',
+    selector: 'app-scopes',
+    templateUrl: '../templates/scopes.component.html',
     animations: [
         trigger(
             'load',
@@ -42,11 +43,10 @@ declare var setup_widgets_desktop: any;
     ]
 })
 
-export class UsersComponent extends BaseComponent implements AfterViewInit {
+export class ScopesComponent extends BaseComponent implements AfterViewInit {
 
-    public users: Array<any>;
-    private routeSub: any;
-    private loaded: boolean = false;
+    public scopes: Array<any>;
+    public loaded: boolean = false;
 
     constructor(
         injector: Injector
@@ -57,24 +57,14 @@ export class UsersComponent extends BaseComponent implements AfterViewInit {
 
     ngAfterViewInit(): void {
         console.log("ngAfterViewChecked");
-
-        this.routeSub = this.route.params.subscribe(params => {
-            
-            this.getUsers();
-        });
+        this.getScopes();
     }
 
-    ngOnChanges(): void {
-        if (!this.loaded){
-            this.loaded = true;
-            
-        }
-    }
+    public getScopes(){
+        console.log("getScopes");
 
-    public getUsers(){
-        console.log("getUser");
-        this.userService.getUsers().then((data) =>{
-            this.users = data;
+        this.scopeService.getScopes().then((data) =>{
+            this.scopes = data;
             setTimeout(() => {
                 setup_widgets_desktop();
                 $("table").dataTable({
@@ -91,6 +81,5 @@ export class UsersComponent extends BaseComponent implements AfterViewInit {
     public ngOnDestroy(): void {
         console.log("ngOnDestroy");
 
-        if (this.routeSub) this.routeSub.unsubscribe();
     }
 }

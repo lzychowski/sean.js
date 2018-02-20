@@ -1,14 +1,45 @@
 import { Component, AfterViewInit, EventEmitter, Input, Injector, Output, ViewChildren, QueryList } from '@angular/core';
 
+import { 
+    trigger, 
+    style, 
+    transition, 
+    animate, 
+    keyframes, 
+    query, 
+    stagger, 
+    group, 
+    state, 
+    animateChild 
+} from '@angular/animations';
+
 import { BaseComponent } from '../../shared/components/base.component';
 
 declare var $: any;
 declare var setup_widgets_desktop: any;
 
-
 @Component({
     selector: 'app-user',
-    templateUrl: '../templates/user.component.html'
+    templateUrl: '../templates/user.component.html',
+    animations: [
+        trigger(
+            'load',
+            [
+                transition(
+                    ':enter', [
+                        style({'opacity': 0}),
+                        animate('500ms', style({'opacity': 1}))
+                    ]
+                ),
+                transition(
+                    ':leave', [
+                        style({'opacity': 1}),
+                        animate('500ms', style({'opacity': 0}))
+                    ]
+                )
+            ]
+        )
+    ]
 })
 
 export class UserComponent extends BaseComponent implements AfterViewInit {

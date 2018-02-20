@@ -1,0 +1,83 @@
+<div id="scrim" class="scrim" [@loader]="loaded">
+    <div class="video-loader">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+        <div class="bar4"></div>
+        <div class="bar5"></div>
+        <div class="bar6"></div>
+    </div>
+</div>
+
+<style>
+
+.video-loader {
+    margin: 0 auto;
+    width: 60px;
+    height: 50px;
+    text-align: center;
+    font-size: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateY(-50%) translateX(-50%) scale(2);
+    transform: translateY(-50%) translateX(-50%) scale(2);
+  }
+  .video-loader > div {
+    height: 100%;
+    width: 8px;
+    display: inline-block;
+    float: left;
+    margin-left: 2px;
+    -webkit-animation: delay 0.8s infinite ease-in-out;
+    animation: delay 0.8s infinite ease-in-out;
+  }
+  .video-loader .bar1 {
+    background-color: #3445dc;
+  }
+  .video-loader .bar2 {
+    background-color: #ccc;
+    -webkit-animation-delay: -0.7s;
+    animation-delay: -0.7s;
+  }
+  .video-loader .bar3 {
+    background-color: #3445dc;
+    -webkit-animation-delay: -0.6s;
+    animation-delay: -0.6s;
+  }
+  .video-loader .bar4 {
+    background-color: #ccc;
+    -webkit-animation-delay: -0.5s;
+    animation-delay: -0.5s;
+  }
+  .video-loader .bar5 {
+    background-color: #3445dc;
+    -webkit-animation-delay: -0.4s;
+    animation-delay: -0.4s;
+  }
+  .video-loader .bar6 {
+    background-color: #ccc;
+    -webkit-animation-delay: -0.3s;
+    animation-delay: -0.3s;
+  }
+  
+  @-webkit-keyframes delay {
+    0%, 40%, 100% {
+      -webkit-transform: scaleY(0.05);
+    }
+    20% {
+      -webkit-transform: scaleY(1);
+    }
+  }
+  @keyframes delay {
+    0%, 40%, 100% {
+      transform: scaleY(0.05);
+      -webkit-transform: scaleY(0.05);
+    }
+    20% {
+      transform: scaleY(1);
+      -webkit-transform: scaleY(1);
+    }
+  }
+
+  </style>

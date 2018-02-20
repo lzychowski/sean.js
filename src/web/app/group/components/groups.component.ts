@@ -19,8 +19,8 @@ declare var $: any;
 declare var setup_widgets_desktop: any;
 
 @Component({
-    selector: 'app-user',
-    templateUrl: '../templates/users.component.html',
+    selector: 'app-groups',
+    templateUrl: '../templates/groups.component.html',
     animations: [
         trigger(
             'load',
@@ -42,11 +42,10 @@ declare var setup_widgets_desktop: any;
     ]
 })
 
-export class UsersComponent extends BaseComponent implements AfterViewInit {
+export class GroupsComponent extends BaseComponent implements AfterViewInit {
 
-    public users: Array<any>;
-    private routeSub: any;
-    private loaded: boolean = false;
+    public groups: Array<any>;
+    public loaded: boolean = false;
 
     constructor(
         injector: Injector
@@ -57,24 +56,14 @@ export class UsersComponent extends BaseComponent implements AfterViewInit {
 
     ngAfterViewInit(): void {
         console.log("ngAfterViewChecked");
-
-        this.routeSub = this.route.params.subscribe(params => {
-            
-            this.getUsers();
-        });
+        this.getGroups();
     }
 
-    ngOnChanges(): void {
-        if (!this.loaded){
-            this.loaded = true;
-            
-        }
-    }
+    public getGroups(){
+        console.log("getGroups");
 
-    public getUsers(){
-        console.log("getUser");
-        this.userService.getUsers().then((data) =>{
-            this.users = data;
+        this.groupService.getGroups().then((data) =>{
+            this.groups = data;
             setTimeout(() => {
                 setup_widgets_desktop();
                 $("table").dataTable({
@@ -91,6 +80,5 @@ export class UsersComponent extends BaseComponent implements AfterViewInit {
     public ngOnDestroy(): void {
         console.log("ngOnDestroy");
 
-        if (this.routeSub) this.routeSub.unsubscribe();
     }
 }

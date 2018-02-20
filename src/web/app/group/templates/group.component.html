@@ -1,0 +1,130 @@
+<div class="row">
+        <!-- col -->
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+
+                <!-- PAGE HEADER -->
+                
+                <a href="#/groups"><i class="fa-fw fa fa-arrow-left"></i> Groups</a>
+                <span>
+                    /  Create
+                </span>
+            </h1>
+        </div>
+        <!-- end col -->
+    </div>
+
+    <!-- end row -->
+
+    <section id="widget-grid" [@load]>
+        <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-6 sortable-grid ui-sortable">
+
+                <div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" id="wid-id-1" 
+                data-widget-colorbutton="false" 
+                data-widget-editbutton="false" 
+                data-widget-custombutton="false" role="widget">
+                    <!-- widget options:
+                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+    
+                    data-widget-colorbutton="false"
+                    data-widget-editbutton="false"
+                    data-widget-togglebutton="false"
+                    data-widget-deletebutton="false"
+                    data-widget-fullscreenbutton="false"
+                    data-widget-custombutton="false"
+                    data-widget-collapsed="true"
+                    data-widget-sortable="false"
+    
+                    -->
+                    <header role="heading" class="ui-sortable-handle">
+                        <span class="widget-icon"> <i class="fa fa-edit txt-color-white"></i> </span>
+                        <h2> Create Group </h2>
+                        <div class="widget-toolbar" role="menu">
+                            <!-- add: non-hidden - to disable auto hide -->
+                        </div>
+                        <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+                    </header>
+    
+                    <!-- widget div-->
+                    <div role="content">
+    
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+    
+                        </div>
+                        <!-- end widget edit box -->
+    
+                        <!-- widget content -->
+                        <div class="widget-body no-padding" style="min-height: 0px;">
+
+                            <div class="alert alert-success fade in" [hidden]="!created" style="margin-bottom: 0px;">
+                                <i class="fa-fw fa fa-check"></i>
+                                <strong>Success</strong> {{ group.name }} was created.
+                            </div>
+
+                            <div class="alert alert-info fade in" [hidden]="!duplicate" style="margin-bottom: 0px;">
+                                <i class="fa-fw fa fa-info"></i>
+                                <strong>Duplicate</strong> Group already exists.
+                            </div>
+    
+                            <form (ngSubmit)="createGroup()" #groupForm="ngForm" class="smart-form" [hidden]="created">
+   
+                                <fieldset>
+                                    
+                                    <section>
+                                        <label class="label">Group Name</label>
+                                        <label class="input">
+                                            <input 
+                                                id="name"
+                                                type="text" 
+                                                class="input-xs" 
+                                                [(ngModel)]="group.name" 
+                                                placeholder="ex. All-API-Containers"
+                                                name="name"
+                                                required
+                                                minlength="4"
+                                                maxlength="100"
+                                                #name="ngModel">
+                                        </label>
+                                        <div *ngIf="name.invalid && (name.dirty || name.touched)">
+                                            <div *ngIf="name.errors.required" class="note note-error">
+                                                Name is required.
+                                            </div>
+                                            <div *ngIf="name.errors.minlength" class="note note-error">
+                                                Name must be at least 4 characters long.
+                                            </div>
+                                            <div *ngIf="name.errors.forbiddenName" class="note note-error">
+                                                Name cannot be Bob.
+                                            </div>
+                                        </div>
+                                    </section>
+
+                                </fieldset>
+                                
+                                <footer>
+                                    <button type="submit" [disabled]="!groupForm.form.valid" class="btn btn-primary">
+                                        Create
+                                    </button>
+                                </footer>
+                            </form>
+    
+                        </div>
+                        <!-- end widget content -->
+    
+                    </div>
+                    <!-- end widget div -->
+    
+                </div>
+            </article>
+        </div>
+        
+    </section>
+
+    <app-modal
+    *ngIf="modal"
+    [objectToRemove]="objectToRemove"
+    (confirm)="confirmModal($event)"
+    >
+    </app-modal>

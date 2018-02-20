@@ -5,7 +5,7 @@
 
                 <!-- PAGE HEADER -->
                 <i class="fa-fw fa fa-home"></i>
-                Users
+                Scopes
             </h1>
         </div>
         <!-- end col -->
@@ -23,8 +23,8 @@
                     role="widget">
                     
                         <header role="heading" class="ui-sortable-handle">
-                            <span class="widget-icon"> <i class="fa fa-users txt-color-white"></i> </span>
-                            <h2> Active Users </h2>
+                            <span class="widget-icon"> <i class="fa fa-cube txt-color-white"></i> </span>
+                            <h2> Scopes </h2>
                             <div class="widget-toolbar" role="menu">
                                 <!-- add: non-hidden - to disable auto hide -->
                 
@@ -36,25 +36,25 @@
                         <div role="content">
                 
                             <div class="widget-body">
-                                <div class="table table-striped" *ngIf="users">
+                                <div class="table table-striped" *ngIf="scopes">
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th></th>
-                                                <th>Email Address</th>
-                                                <th>First Name</th>
-                                                <th>Last Name</th>
+                                                <th>Name</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let user of users;">
-                                                <td style="text-align: center;"><a href="#/users/{{ user.id }}"> <i class="fa fa-edit" title="Edit user"></i></a>  </td>
-                                                <td>{{ user.email_address }}</td>
-                                                <td>{{ user.first_name }}</td>
-                                                <td>{{ user.last_name }}</td>
+                                            <tr *ngFor="let scope of scopes;">
+                                                <td>{{ scope.name }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
+                                </div>
+
+                                <div class="widget-footer">
+                                    <a href="#/scopes/create" class="btn btn-sm btn-primary" type="button">
+                                        <i class="fa fa-refresh fa-plus"></i> Create Scope
+                                    </a>
                                 </div>
                             </div>
                 

@@ -11,7 +11,7 @@ create table "user" (
 
 create table "group" (
     id serial not null,
-    name varchar(100) not null,
+    name varchar(100) unique not null,
     parent_group int,
     created_time timestamp default now(),
     updated_time timestamp,
@@ -22,7 +22,7 @@ create table "group" (
 
 create table scope (
     id serial not null,
-    name varchar(100) not null,
+    name varchar(100) unique not null,
     parent_scope int,
     parent_group int,
     created_time timestamp default now(),

@@ -1,9 +1,23 @@
-import { AfterViewInit, Component, EventEmitter, Input, Injectable, Injector, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
+import { 
+    AfterViewInit, 
+    Component, 
+    EventEmitter,
+    Input, 
+    Injectable, 
+    Injector, 
+    OnInit, 
+    Output, 
+    QueryList, 
+    ViewChildren 
+} from '@angular/core';
+
 import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import * as appGlobals from '../globals';
 import { UserService } from '../../user/services/user.service';
+import { ScopeService } from '../../scope/services/scope.service';
+import { GroupService } from '../../group/services/group.service';
 
 export class BaseComponent implements OnInit, AfterViewInit {
 
@@ -12,12 +26,18 @@ export class BaseComponent implements OnInit, AfterViewInit {
     protected sanitizer: DomSanitizer;
     
     protected userService: UserService;
+    protected scopeService: ScopeService;
+    protected groupService: GroupService;
 
     constructor(private injector: Injector) {
         console.log("constructor");
-        this.userService = injector.get(UserService);
+        
         this.route = injector.get(ActivatedRoute);
         this.router = injector.get(Router);
+
+        this.userService = injector.get(UserService);
+        this.scopeService = injector.get(ScopeService)
+        this.groupService = injector.get(GroupService);
     }
 
     ngOnInit(): void {
