@@ -43,16 +43,18 @@ declare var setup_widgets_desktop: any;
     ]
 })
 
-export class ScopesComponent extends BaseComponent implements AfterViewInit {
+export class ScopesComponent extends BaseComponent {
 
     public scopes: Array<any>;
-    public loaded: boolean = false;
 
     constructor(
         injector: Injector
     ) {
         super(injector);
         console.log("constructor");
+        $(".menu-option").removeClass("active");
+        $(".scopes-menu-option").addClass("active");
+        $("#scrim-main").fadeOut(100);
     }
 
     ngAfterViewInit(): void {
@@ -63,7 +65,8 @@ export class ScopesComponent extends BaseComponent implements AfterViewInit {
     public getScopes(){
         console.log("getScopes");
 
-        this.scopeService.getScopes().then((data) =>{
+        this.scopeService.getScopes()
+        .then(data =>{
             this.scopes = data;
             setTimeout(() => {
                 setup_widgets_desktop();
@@ -73,13 +76,16 @@ export class ScopesComponent extends BaseComponent implements AfterViewInit {
                 });
                 this.loaded = true;
             });
-        }).catch((e) => {
-
+        })
+        .catch(e => {
+            this.showError = true;
+            this.loaded = true;
         });
     }
 
     public ngOnDestroy(): void {
         console.log("ngOnDestroy");
 
+        if (this.routeSub) this.routeSub.unsubscribe();
     }
 }

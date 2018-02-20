@@ -2,11 +2,8 @@ import {
     AfterViewInit, 
     Component, 
     EventEmitter,
-    Input, 
-    Injectable, 
-    Injector, 
-    OnInit, 
-    Output, 
+    Input, Injectable, Injector, 
+    OnInit, Output, OnDestroy,
     QueryList, 
     ViewChildren 
 } from '@angular/core';
@@ -19,7 +16,7 @@ import { UserService } from '../../user/services/user.service';
 import { ScopeService } from '../../scope/services/scope.service';
 import { GroupService } from '../../group/services/group.service';
 
-export class BaseComponent implements OnInit, AfterViewInit {
+export class BaseComponent implements OnInit, AfterViewInit, OnDestroy {
 
     protected route: ActivatedRoute;
     protected router: Router;
@@ -28,6 +25,12 @@ export class BaseComponent implements OnInit, AfterViewInit {
     protected userService: UserService;
     protected scopeService: ScopeService;
     protected groupService: GroupService;
+
+    protected routeSub: any;
+    protected loaded: boolean = false;
+    protected modal: boolean = false;
+    protected showError: boolean = false;
+    protected created: boolean = false;
 
     constructor(private injector: Injector) {
         console.log("constructor");
@@ -42,11 +45,13 @@ export class BaseComponent implements OnInit, AfterViewInit {
 
     ngOnInit(): void {
         console.log("ngOnInit");
-        
     }
 
     ngAfterViewInit(): void {
         console.log("ngAfterViewInit");
     }
 
+    ngOnDestroy(): void {
+        console.log("ngOnDestroy");
+    }
 }

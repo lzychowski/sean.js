@@ -42,14 +42,11 @@ declare var setup_widgets_desktop: any;
     ]
 })
 
-export class EditUserGroupComponent extends BaseComponent implements AfterViewInit {
+export class EditUserGroupComponent extends BaseComponent {
 
     public user: any;
     public groups: Array<any>;
     public selectedGroups: Array<any>;
-    public loaded: boolean = false;
-    public routeSub: any;
-    public created: boolean = false;
     
     // race condition
     public allGroupsLoaded: boolean = false;
@@ -60,6 +57,9 @@ export class EditUserGroupComponent extends BaseComponent implements AfterViewIn
     ) {
         super(injector);
         console.log("constructor");
+        $(".menu-option").removeClass("active");
+        $(".users-menu-option").addClass("active");
+        $("#scrim-main").fadeOut(100);
     }
 
     ngAfterViewInit(): void {
@@ -76,17 +76,21 @@ export class EditUserGroupComponent extends BaseComponent implements AfterViewIn
     public getUser(id: number): void {
         console.log("getUser");
 
-        this.userService.getUser(id).then((data) =>{
+        this.userService.getUser(id)
+        .then(data =>{
             this.user = data;
-        }).catch((e) => {
-
+        })
+        .catch(e => {
+            this.showError = true;
+            this.loaded = true;
         });
     }
 
     public getGroups(){
         console.log("getGroups");
 
-        this.groupService.getGroups().then((data) =>{
+        this.groupService.getGroups()
+        .then(data =>{
             this.groups = data;
             setTimeout(() => {
                 setup_widgets_desktop();
@@ -95,20 +99,25 @@ export class EditUserGroupComponent extends BaseComponent implements AfterViewIn
                 this.allGroupsLoaded = true;
                 this.updateSelect2();
             });
-        }).catch((e) => {
-
+        })
+        .catch(e => {
+            this.showError = true;
+            this.loaded = true;
         });
     }
 
     public getUserGroups(id: number): void {
         console.log("getUserGroups");
 
-        this.userService.getUserGroups(id).then((data) =>{
+        this.userService.getUserGroups(id)
+        .then(data =>{
             this.selectedGroups = data;
             this.userGroupsLoaded = true;
             this.updateSelect2();
-        }).catch((e) => {
-
+        })
+        .catch(e => {
+            this.showError = true;
+            this.loaded = true;
         });
     }
 
@@ -116,11 +125,14 @@ export class EditUserGroupComponent extends BaseComponent implements AfterViewIn
         console.log("updateSelect2");
 
         if (this.allGroupsLoaded && this.userGroupsLoaded){
+
             this.loaded = true;
+
             let selections = [];
             for (var i = 0; i < this.selectedGroups.length; i++){
                 selections.push(this.selectedGroups[i].group_id);
             }
+
             $(".select2-list").val(selections);
             $(".select2-list").trigger('change');
         }
@@ -136,19 +148,22 @@ export class EditUserGroupComponent extends BaseComponent implements AfterViewIn
         }
 
         this.userService.modifyUserGroups(this.user.id, ids)
-        .then((data) =>{
+        .then(data =>{
             console.log(data);
             this.created = true;
             setTimeout(() => {
                 this.created = false;
             }, 2000);
-        }).catch(e =>{
-
+        })
+        .catch(e =>{
+            this.showError = true;
+            this.loaded = true;
         });
     }
 
     public ngOnDestroy(): void {
         console.log("ngOnDestroy");
-
+        
+        if (this.routeSub) { this.routeSub.unsubscribe() }
     }
 }

@@ -20,20 +20,19 @@ module.exports = webpackMerge(commonConfig, {
   },
 
   module: {
-    rules: [
-        /*
-      { 
+    rules: [ 
+      {
         test: /globals.ts$/,
         loader: StringReplacePlugin.replace({
           replacements: [
               {
-                  pattern: /server/g,
+                  pattern: /api_server/g,
                   replacement: function (match, p1, offset, string) {
-                      return "url";
+                      return "http://localhost";
                   }
               }
           ]})
-      }*/
+      }
     ]
   },
   

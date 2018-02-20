@@ -42,14 +42,11 @@ declare var setup_widgets_desktop: any;
     ]
 })
 
-export class EditGroupComponent extends BaseComponent implements AfterViewInit {
+export class EditGroupComponent extends BaseComponent {
 
     public group: any;
     public scopes: Array<any>;
     public selectedScopes: Array<any>;
-    public loaded: boolean = false;
-    public routeSub: any;
-    public created: boolean = false;
     
     // race condition
     public allScopesLoaded: boolean = false;
@@ -61,6 +58,9 @@ export class EditGroupComponent extends BaseComponent implements AfterViewInit {
     ) {
         super(injector);
         console.log("constructor");
+        $(".menu-option").removeClass("active");
+        $(".groups-menu-option").addClass("active");
+        $("#scrim-main").fadeOut(100);
     }
 
     ngAfterViewInit(): void {
@@ -77,17 +77,21 @@ export class EditGroupComponent extends BaseComponent implements AfterViewInit {
     public getGroup(id: number): void {
         console.log("getGroup");
 
-        this.groupService.getGroup(id).then((data) =>{
+        this.groupService.getGroup(id)
+        .then(data =>{
             this.group = data;
-        }).catch((e) => {
-
+        })
+        .catch(e => {
+            this.showError = true;
+            this.loaded = true;
         });
     }
 
     public getScopes(){
         console.log("getScopes");
 
-        this.scopeService.getScopes().then((data) =>{
+        this.scopeService.getScopes()
+        .then(data =>{
             this.scopes = data;
             setTimeout(() => {
                 setup_widgets_desktop();
@@ -96,20 +100,25 @@ export class EditGroupComponent extends BaseComponent implements AfterViewInit {
                 this.allScopesLoaded = true;
                 this.updateSelect2();
             });
-        }).catch((e) => {
-
+        })
+        .catch(e => {
+            this.showError = true;
+            this.loaded = true;
         });
     }
 
     public getGroupScopes(id: number): void {
         console.log("getGroupScopes");
 
-        this.groupService.getGroupScopes(id).then((data) =>{
+        this.groupService.getGroupScopes(id)
+        .then(data =>{
             this.selectedScopes = data;
             this.groupScopesLoaded = true;
             this.updateSelect2();
-        }).catch((e) => {
-
+        })
+        .catch(e => {
+            this.showError = true;
+            this.loaded = true;
         });
     }
 
@@ -136,19 +145,22 @@ export class EditGroupComponent extends BaseComponent implements AfterViewInit {
         }
 
         this.groupService.modifyGroupScopes(this.group.id, ids)
-        .then((data) =>{
+        .then(data =>{
             console.log(data);
             this.created = true;
             setTimeout(() => {
                 this.created = false;
             }, 2000);
-        }).catch(e =>{
-
+        })
+        .catch(e =>{
+            this.showError = true;
+            this.loaded = true;
         });
     }
 
     public ngOnDestroy(): void {
         console.log("ngOnDestroy");
 
+        if (this.routeSub) this.routeSub.unsubscribe();
     }
 }

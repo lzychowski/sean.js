@@ -42,16 +42,18 @@ declare var setup_widgets_desktop: any;
     ]
 })
 
-export class GroupsComponent extends BaseComponent implements AfterViewInit {
+export class GroupsComponent extends BaseComponent {
 
     public groups: Array<any>;
-    public loaded: boolean = false;
 
     constructor(
         injector: Injector
     ) {
         super(injector);
         console.log("constructor");
+        $(".menu-option").removeClass("active");
+        $(".groups-menu-option").addClass("active");
+        $("#scrim-main").fadeOut(100);
     }
 
     ngAfterViewInit(): void {
@@ -62,7 +64,8 @@ export class GroupsComponent extends BaseComponent implements AfterViewInit {
     public getGroups(){
         console.log("getGroups");
 
-        this.groupService.getGroups().then((data) =>{
+        this.groupService.getGroups()
+        .then(data =>{
             this.groups = data;
             setTimeout(() => {
                 setup_widgets_desktop();
@@ -72,13 +75,16 @@ export class GroupsComponent extends BaseComponent implements AfterViewInit {
                 });
                 this.loaded = true;
             });
-        }).catch((e) => {
-
+        })
+        .catch(e => {
+            this.showError = true;
+            this.loaded = true;
         });
     }
 
     public ngOnDestroy(): void {
         console.log("ngOnDestroy");
 
+        if (this.routeSub) this.routeSub.unsubscribe();
     }
 }

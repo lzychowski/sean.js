@@ -15,14 +15,14 @@ import { BaseComponent } from '../../shared/components/base.component';
 declare var $: any;
 
 @Component({
-    selector: 'app-modal',
-    templateUrl: '../templates/modal.component.html'
+    selector: 'app-modal-error',
+    templateUrl: '../templates/error-modal.component.html'
 })
 
-export class ModalComponent extends BaseComponent {
+export class ErrorModalComponent extends BaseComponent {
 
-    @Input('objectToRemove') objectToRemove: any;
-    @Output() confirm: EventEmitter<any> = new EventEmitter<any>();
+    @Input('showError') showError: boolean;
+    @Output() showErrorEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     constructor(
         injector: Injector
@@ -32,17 +32,12 @@ export class ModalComponent extends BaseComponent {
     }
 
     ngOnInit(): void {
-        $("#modal-dialog").modal();
+        $("#modal-error").modal();
     }
 
     public yes(): void {
         console.log("done");
-        this.confirm.emit(true);
-    }
-
-    public cancel(): void {
-        console.log("selectDate");
-        this.confirm.emit(false);
+        this.showErrorEmitter.emit(false);
     }
 }
 

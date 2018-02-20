@@ -42,10 +42,9 @@ declare var setup_widgets_desktop: any;
     ]
 })
 
-export class ScopeComponent extends BaseComponent implements AfterViewInit {
+export class ScopeComponent extends BaseComponent {
 
     public scope: any = {};
-    public created: boolean = false;
     public duplicate: boolean = false;
 
     constructor(
@@ -53,14 +52,9 @@ export class ScopeComponent extends BaseComponent implements AfterViewInit {
     ) {
         super(injector);
         console.log("constructor");
-    }
-
-    ngAfterViewInit(): void {
-        console.log("ngAfterViewChecked");
-    }
-
-    ngOnChanges(): void {
-
+        $(".menu-option").removeClass("active");
+        $(".scopes-menu-option").addClass("active");
+        $("#scrim-main").fadeOut(100);
     }
 
     public createScope(){
@@ -69,20 +63,24 @@ export class ScopeComponent extends BaseComponent implements AfterViewInit {
         this.created = false;
         this.duplicate = false;
 
-        this.scopeService.createScope(this.scope).then((data) =>{
+        this.scopeService.createScope(this.scope)
+        .then(data =>{
             if (data.created) {
                 this.created = true;
             } else {
                 this.duplicate = true;
             }
-        }).catch((e) => {
-
+        })
+        .catch(e => {
+            this.showError = true;
+            this.loaded = true;
         });
     }
 
     public ngOnDestroy(): void {
         console.log("ngOnDestroy");
 
+        if (this.routeSub) this.routeSub.unsubscribe();
     }
 
 }

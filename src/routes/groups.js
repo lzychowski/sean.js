@@ -7,17 +7,25 @@ var router = express.Router();
  *  route: /api/groups/
  */
 
- // get groups
- router.get('/', function (req, res, next) {
-    Group.findAll().then(groups => {
+// get groups
+router.get('/', function (req, res, next) {
+    Group.findAll()
+    .then(groups => {
         res.send(groups);
+    })
+    .catch(e =>{
+        throw e;
     });
 });
 
 // get group by id
 router.get('/:id', function (req, res, next) {
-    Group.findById(req.params.id).then(group => {
+    Group.findById(req.params.id)
+    .then(group => {
         res.send(group);
+    })
+    .catch(e =>{
+        throw e;
     });
 });
 
@@ -26,9 +34,12 @@ router.get('/:id/scopes', function (req, res, next) {
     sequelize.query(
         'select gs.id, gs.group_id, gs.scope_id, s.name from group_scope gs inner join scope s on gs.scope_id = s.id where gs.group_id = ? and gs.active = true;',
         { raw: true, replacements: [ req.params.id ]}
-    ).then(group_scopes => {
+    )
+    .then(group_scopes => {
         group_scopes ? res.send(group_scopes[0]) : [];
-        
+    })
+    .catch(e =>{
+        throw e;
     });
 });
 
@@ -42,6 +53,9 @@ router.post('/', function (req, res, next) {
            created: created,
            group: group.get({ plain: true })
        });
+    })
+    .catch(e =>{
+        throw e;
     });
 });
 
@@ -59,9 +73,12 @@ router.post('/:id/scopes', function (req, res, next) {
     sequelize.query(
         "SELECT * FROM modifyGroupScopes(?, ?);",
         { raw: true, replacements: [ req.params.id, scopes ]}
-    ).then(dada => {
-        console.log(data);
+    )
+    .then(data => {
         res.send(data);
+    })
+    .catch(e =>{
+        throw e;
     });
 });
 

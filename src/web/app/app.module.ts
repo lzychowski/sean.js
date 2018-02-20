@@ -22,6 +22,8 @@ import { LoaderComponent } from './shared/components/loader.component';
 import { EditGroupComponent } from './group/components/edit-group.component';
 import { EditUserGroupComponent } from './user/components/edit-user-group.component';
 import { EditUserScopeComponent } from './user/components/edit-user-scope.component';
+import { NotFoundComponent } from './shared/components/404.component';
+import { ErrorModalComponent } from './shared/components/error-modal.component';
 
 @NgModule({
     declarations: [
@@ -36,7 +38,9 @@ import { EditUserScopeComponent } from './user/components/edit-user-scope.compon
         LoaderComponent,
         EditGroupComponent,
         EditUserGroupComponent,
-        EditUserScopeComponent
+        EditUserScopeComponent,
+        NotFoundComponent,
+        ErrorModalComponent
     ],
     imports: [
         BrowserModule, 

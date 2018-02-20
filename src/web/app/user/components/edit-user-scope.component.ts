@@ -42,14 +42,11 @@ declare var setup_widgets_desktop: any;
     ]
 })
 
-export class EditUserScopeComponent extends BaseComponent implements AfterViewInit {
+export class EditUserScopeComponent extends BaseComponent {
 
     public user: any;
     public scopes: Array<any>;
     public selectedScopes: Array<any>;
-    public loaded: boolean = false;
-    public routeSub: any;
-    public created: boolean = false;
     
     // race condition
     public allScopesLoaded: boolean = false;
@@ -60,6 +57,9 @@ export class EditUserScopeComponent extends BaseComponent implements AfterViewIn
     ) {
         super(injector);
         console.log("constructor");
+        $(".menu-option").removeClass("active");
+        $(".users-menu-option").addClass("active");
+        $("#scrim-main").fadeOut(100);
     }
 
     ngAfterViewInit(): void {
@@ -76,17 +76,21 @@ export class EditUserScopeComponent extends BaseComponent implements AfterViewIn
     public getUser(id: number): void {
         console.log("getUser");
 
-        this.userService.getUser(id).then((data) =>{
+        this.userService.getUser(id)
+        .then(data =>{
             this.user = data;
-        }).catch((e) => {
-
+        })
+        .catch(e => {
+            this.showError = true;
+            this.loaded = true;
         });
     }
 
     public getScopes(){
         console.log("getScopes");
 
-        this.scopeService.getScopes().then((data) =>{
+        this.scopeService.getScopes()
+        .then(data =>{
             this.scopes = data;
             setTimeout(() => {
                 setup_widgets_desktop();
@@ -95,20 +99,25 @@ export class EditUserScopeComponent extends BaseComponent implements AfterViewIn
                 this.allScopesLoaded = true;
                 this.updateSelect2();
             });
-        }).catch((e) => {
-
+        })
+        .catch(e => {
+            this.showError = true;
+            this.loaded = true;
         });
     }
 
     public getUserScopes(id: number): void {
         console.log("getUserScopes");
 
-        this.userService.getUserScopes(id).then((data) =>{
+        this.userService.getUserScopes(id)
+        .then(data =>{
             this.selectedScopes = data;
             this.userScopesLoaded = true;
             this.updateSelect2();
-        }).catch((e) => {
-
+        })
+        .catch(e => {
+            this.showError = true;
+            this.loaded = true;
         });
     }
 
@@ -136,19 +145,22 @@ export class EditUserScopeComponent extends BaseComponent implements AfterViewIn
         }
 
         this.userService.modifyUserScopes(this.user.id, ids)
-        .then((data) =>{
+        .then(data =>{
             console.log(data);
             this.created = true;
             setTimeout(() => {
                 this.created = false;
             }, 2000);
-        }).catch(e =>{
-
+        })
+        .catch(e =>{
+            this.showError = true;
+            this.loaded = true;
         });
     }
 
     public ngOnDestroy(): void {
         console.log("ngOnDestroy");
-
+        
+        if (this.routeSub) { this.routeSub.unsubscribe() }
     }
 }

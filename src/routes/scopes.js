@@ -9,15 +9,23 @@ var router = express.Router();
 
  // get scopes
 router.get('/', function (req, res, next) {
-    Scope.findAll().then(scopes => {
+    Scope.findAll()
+    .then(scopes => {
         res.send(scopes);
+    })
+    .catch(e =>{
+        throw e;
     });
 });
 
 // get scope by id
 router.get('/:id', function (req, res, next) {
-    Scope.findById(req.params.id).then(scope => {
+    Scope.findById(req.params.id)
+    .then(scope => {
         res.send(scope);
+    })
+    .catch(e =>{
+        throw e;
     });
 });
 
@@ -31,6 +39,9 @@ router.post('/', function (req, res, next) {
            created: created,
            scope: scope.get({ plain: true })
        });
+    })
+    .catch(e =>{
+        throw e;
     });
 });
 

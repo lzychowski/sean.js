@@ -32,18 +32,17 @@ import {
             [
                 state('false', style({'opacity': 1, 'visibility': 'initial'})),
                 state('true',   style({'opacity': 0, 'visibility': 'hidden'})),
-                transition('0 => 1', animate('500ms 1s'))
+                transition('0 => 1', animate('300ms'))
             ]
         )
     ]
 })
 
-export class LoaderComponent implements OnInit, AfterViewChecked, AfterViewInit, OnDestroy {
+export class LoaderComponent {
 
     // data members
     // ------------
     @Input('loaded') loaded: boolean;
-
 
     // methods
     // -------
@@ -51,24 +50,4 @@ export class LoaderComponent implements OnInit, AfterViewChecked, AfterViewInit,
     constructor(){
         console.log("constructor");
     }
-
-    // angular 2 lifecycle hooks
-    // -------------------------
-
-    ngAfterViewInit(): void {
-        console.log("ngAfterViewInit");
-    }
-
-    ngAfterViewChecked(): void {
-
-    }
-
-    ngOnInit(): void {
-        console.log("ngOnInit");
-    }
- 
-    ngOnDestroy() {
-        
-    }
-
 }

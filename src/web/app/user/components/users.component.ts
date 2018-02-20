@@ -42,31 +42,32 @@ declare var setup_widgets_desktop: any;
     ]
 })
 
-export class UsersComponent extends BaseComponent implements AfterViewInit {
+export class UsersComponent extends BaseComponent {
 
     public users: Array<any>;
-    private routeSub: any;
-    private loaded: boolean = false;
 
     constructor(
         injector: Injector
     ) {
         super(injector);
         console.log("constructor");
+        $(".menu-option").removeClass("active");
+        $(".users-menu-option").addClass("active");
+        $("#scrim-main").fadeOut(100);
     }
 
     ngAfterViewInit(): void {
         console.log("ngAfterViewChecked");
 
         this.routeSub = this.route.params.subscribe(params => {
-            
             this.getUsers();
         });
     }
 
     public getUsers(){
         console.log("getUser");
-        this.userService.getUsers().then((data) =>{
+        this.userService.getUsers()
+        .then(data =>{
             this.users = data;
             setTimeout(() => {
                 setup_widgets_desktop();
@@ -76,8 +77,10 @@ export class UsersComponent extends BaseComponent implements AfterViewInit {
                 });
                 this.loaded = true;
             });
-        }).catch((e) => {
-
+        })
+        .catch(e => {
+            this.showError = true;
+            this.loaded = true;
         });
     }
 

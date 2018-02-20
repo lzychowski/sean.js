@@ -42,10 +42,9 @@ declare var setup_widgets_desktop: any;
     ]
 })
 
-export class GroupComponent extends BaseComponent implements AfterViewInit {
+export class GroupComponent extends BaseComponent {
 
     public group: any = {};
-    public created: boolean = false;
     public duplicate: boolean = false;
 
     constructor(
@@ -53,14 +52,9 @@ export class GroupComponent extends BaseComponent implements AfterViewInit {
     ) {
         super(injector);
         console.log("constructor");
-    }
-
-    ngAfterViewInit(): void {
-        console.log("ngAfterViewChecked");
-    }
-
-    ngOnChanges(): void {
-
+        $(".menu-option").removeClass("active");
+        $(".groups-menu-option").addClass("active");
+        $("#scrim-main").fadeOut(100);
     }
 
     public createGroup(){
@@ -69,20 +63,23 @@ export class GroupComponent extends BaseComponent implements AfterViewInit {
         this.created = false;
         this.duplicate = false;
 
-        this.groupService.createGroup(this.group).then((data) =>{
+        this.groupService.createGroup(this.group)
+        .then(data =>{
             if (data.created) {
                 this.created = true;
             } else {
                 this.duplicate = true;
             }
-        }).catch((e) => {
-
+        })
+        .catch(e => {
+            this.showError = true;
+            this.loaded = true;
         });
     }
 
     public ngOnDestroy(): void {
         console.log("ngOnDestroy");
 
+        if (this.routeSub) this.routeSub.unsubscribe();
     }
-
 }

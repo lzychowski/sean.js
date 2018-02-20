@@ -15,13 +15,12 @@ export class ScopeService extends BaseService<any> {
     public createScope(scope: any): Promise<any> {
         console.log("createScope");
 
-        //return this.get(this.API_URL + "");
-        return this.post("http://localhost:3000/api/scopes/", { name: scope.name });
+        return this.post(this.API_URL + "/api/scopes/", { name: scope.name });
     }
 
     public getScopes(): Promise<Array<any>> {
         console.log("getScopes");
 
-        return this.getMany("http://localhost:3000/api/scopes/");
+        return this.getMany(this.API_URL + "/api/scopes/");
     }
 }

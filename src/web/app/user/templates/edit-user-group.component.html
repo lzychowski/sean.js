@@ -98,11 +98,6 @@
         
     </section>
 
-    <app-modal
-    *ngIf="modal"
-    [objectToRemove]="objectToRemove"
-    (confirm)="confirmModal($event)"
-    >
-    </app-modal>
-
+    <app-modal *ngIf="modal" [objectToRemove]="objectToRemove" (confirm)="confirmModal($event)"></app-modal>
     <app-loader [loaded]="loaded"></app-loader>
+    <app-modal-error *ngIf="showError" [(showError)]="showError"></app-modal-error>

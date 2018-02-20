@@ -345,17 +345,17 @@ Use search to find needed section.
 			-->
 
 			<ul>
-				<li class="">
+				<li class="users-menu-option menu-option">
 					<a href="#/users" title="blank_"><i class="fa fa-lg fa-fw fa-users"></i> <span class="menu-item-parent">Users</span></a>
 				</li>
 			</ul>
 			<ul>
-				<li class="">
+				<li class="groups-menu-option menu-option">
 					<a href="#/groups" title="blank_"><i class="fa fa-lg fa-fw fa-cubes"></i> <span class="menu-item-parent">Groups</span></a>
 				</li>
 			</ul>
 			<ul>
-                <li class="">
+                <li class="scopes-menu-option menu-option">
                     <a href="#/scopes" title="blank_"><i class="fa fa-lg fa-fw fa-cube"></i> <span class="menu-item-parent">Scopes</span></a>
                 </li>
             </ul>
@@ -396,6 +396,103 @@ Use search to find needed section.
 	<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
 	<script data-pace-options='{ "restartOnRequestAfter": true }' src="~/js/plugin/pace/pace.min.js"></script>-->
 <!-- #PLUGINS -->
+
+    <div id="scrim-main" class="scrim">
+        <div class="video-loader">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+            <div class="bar4"></div>
+            <div class="bar5"></div>
+            <div class="bar6"></div>
+        </div>
+    </div>
+    
+    <style>
+    
+    .scrim {
+        background-color: #333; 
+        position: fixed; 
+        top: 0; 
+        bottom: 0; 
+        left: 0; 
+        right:0; 
+        background-size: cover; 
+        text-align: center; 
+        z-index: 999999;
+        height: 100vh;
+    }
+    
+    .video-loader {
+        margin: 0 auto;
+        width: 60px;
+        height: 50px;
+        text-align: center;
+        font-size: 10px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translateY(-50%) translateX(-50%) scale(2);
+        transform: translateY(-50%) translateX(-50%) scale(2);
+      }
+      .video-loader > div {
+        height: 100%;
+        width: 8px;
+        display: inline-block;
+        float: left;
+        margin-left: 2px;
+        -webkit-animation: delay 0.8s infinite ease-in-out;
+        animation: delay 0.8s infinite ease-in-out;
+      }
+      .video-loader .bar1 {
+        background-color: #3445dc;
+      }
+      .video-loader .bar2 {
+        background-color: #ccc;
+        -webkit-animation-delay: -0.7s;
+        animation-delay: -0.7s;
+      }
+      .video-loader .bar3 {
+        background-color: #3445dc;
+        -webkit-animation-delay: -0.6s;
+        animation-delay: -0.6s;
+      }
+      .video-loader .bar4 {
+        background-color: #ccc;
+        -webkit-animation-delay: -0.5s;
+        animation-delay: -0.5s;
+      }
+      .video-loader .bar5 {
+        background-color: #3445dc;
+        -webkit-animation-delay: -0.4s;
+        animation-delay: -0.4s;
+      }
+      .video-loader .bar6 {
+        background-color: #ccc;
+        -webkit-animation-delay: -0.3s;
+        animation-delay: -0.3s;
+      }
+      
+      @-webkit-keyframes delay {
+        0%, 40%, 100% {
+          -webkit-transform: scaleY(0.05);
+        }
+        20% {
+          -webkit-transform: scaleY(1);
+        }
+      }
+      @keyframes delay {
+        0%, 40%, 100% {
+          transform: scaleY(0.05);
+          -webkit-transform: scaleY(0.05);
+        }
+        20% {
+          transform: scaleY(1);
+          -webkit-transform: scaleY(1);
+        }
+      }
+    
+      </style>
 	
 
 <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->

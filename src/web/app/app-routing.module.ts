@@ -11,6 +11,7 @@ import { ScopeComponent } from './scope/components/scope.component';
 import { ScopesComponent } from './scope/components/scopes.component';
 import { AppComponent } from './app.component';
 import { EditGroupComponent } from './group/components/edit-group.component';
+import { NotFoundComponent } from './shared/components/404.component';
 
 export const routes: Routes = [
     {
@@ -48,6 +49,15 @@ export const routes: Routes = [
     {
         path: 'groups/:id',
         component: EditGroupComponent
+    },
+    {
+        path: '',
+        redirectTo: 'users',
+        pathMatch: 'full'
+    },
+    {
+        path: '**',
+        component: NotFoundComponent
     }
 ];
 
