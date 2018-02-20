@@ -14,6 +14,13 @@ router.get('/', function (req, res, next) {
     });
 });
 
+// get scope by id
+router.get('/:id', function (req, res, next) {
+    Scope.findById(req.params.id).then(scope => {
+        res.send(scope);
+    });
+});
+
 // create scope
 router.post('/', function (req, res, next) {
     console.log(req.body);
@@ -26,5 +33,6 @@ router.post('/', function (req, res, next) {
        });
     });
 });
+
 
 module.exports = router;

@@ -98,10 +98,10 @@
                                 <div *ngIf="!groups || groups.length === 0" style="padding: 5px 0 5px 15px;"> This user does not belong to any groups.</div>
                             </div>
 
-                            <div class="widget-footer">
-                                <button class="btn btn-sm btn-primary" type="button">
-                                    <i class="fa fa-refresh fa-plus"></i> Assign Group
-                                </button>
+                            <div class="widget-footer" *ngIf="user">
+                                <a href="#/users/{{ user.id }}/groups" class="btn btn-sm btn-primary" type="button">
+                                    <i class="fa fa-refresh fa-plus"></i> Assign Groups
+                                </a>
                             </div>
                         </div>
             
@@ -143,10 +143,10 @@
                                 </table>
                             </div>
 
-                            <div class="widget-footer">
-                                <button class="btn btn-sm btn-primary" type="button">
-                                    <i class="fa fa-refresh fa-plus"></i> Assign Scope
-                                </button>
+                            <div class="widget-footer" *ngIf="user">
+                                <a href="#/users/{{ user.id }}/scopes" class="btn btn-sm btn-primary" type="button">
+                                    <i class="fa fa-refresh fa-plus"></i> Assign Scopes
+                                </a>
                             </div>
                         </div>
             
@@ -164,3 +164,5 @@
     (confirm)="confirmModal($event)"
     >
     </app-modal>
+
+    <app-loader [loaded]="loaded"></app-loader>

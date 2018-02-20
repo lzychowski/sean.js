@@ -64,13 +64,6 @@ export class UsersComponent extends BaseComponent implements AfterViewInit {
         });
     }
 
-    ngOnChanges(): void {
-        if (!this.loaded){
-            this.loaded = true;
-            
-        }
-    }
-
     public getUsers(){
         console.log("getUser");
         this.userService.getUsers().then((data) =>{

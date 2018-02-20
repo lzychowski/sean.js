@@ -3,16 +3,27 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { UserComponent } from './user/components/user.component';
 import { UsersComponent } from './user/components/users.component';
+import { EditUserGroupComponent } from './user/components/edit-user-group.component';
+import { EditUserScopeComponent } from './user/components/edit-user-scope.component';
 import { GroupComponent } from './group/components/group.component';
 import { GroupsComponent } from './group/components/groups.component';
 import { ScopeComponent } from './scope/components/scope.component';
 import { ScopesComponent } from './scope/components/scopes.component';
 import { AppComponent } from './app.component';
+import { EditGroupComponent } from './group/components/edit-group.component';
 
 export const routes: Routes = [
     {
         path: 'users/:id',
         component: UserComponent
+    },
+    {
+        path: 'users/:id/groups',
+        component: EditUserGroupComponent
+    },
+    {
+        path: 'users/:id/scopes',
+        component: EditUserScopeComponent
     },
     {
         path: 'users',
@@ -33,6 +44,10 @@ export const routes: Routes = [
     {
         path: 'scopes',
         component: ScopesComponent
+    },
+    {
+        path: 'groups/:id',
+        component: EditGroupComponent
     }
 ];
 

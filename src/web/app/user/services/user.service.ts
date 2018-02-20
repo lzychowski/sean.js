@@ -48,4 +48,16 @@ export class UserService extends BaseService<any> {
 
         return this.put("http://localhost:3000/api/users/scopes/" + id);
     }
+
+    public modifyUserGroups(id: number, groups: Array<any>): Promise<any> {
+        console.log("modifyUserGroups");
+
+        return this.post("http://localhost:3000/api/users/" + id + "/groups/", groups);
+    }
+
+    public modifyUserScopes(id: number, scopes: Array<any>): Promise<any> {
+        console.log("modifyUserScopes");
+
+        return this.post("http://localhost:3000/api/users/" + id + "/scopes/", scopes);
+    }
 }

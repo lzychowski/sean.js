@@ -19,9 +19,27 @@ export class GroupService extends BaseService<any> {
         return this.post("http://localhost:3000/api/groups/", { name: group.name });
     }
 
+    public getGroup(id: number): Promise<any> {
+        console.log("getGroups");
+
+        return this.get("http://localhost:3000/api/groups/" + id);
+    }
+
     public getGroups(): Promise<Array<any>> {
         console.log("getGroups");
 
         return this.getMany("http://localhost:3000/api/groups/");
+    }
+
+    public getGroupScopes(id: number): Promise<Array<any>> {
+        console.log("getGroups");
+
+        return this.getMany("http://localhost:3000/api/groups/" + id + "/scopes/");
+    }
+
+    public modifyGroupScopes(id: number, scopes: Array<any>): Promise<any> {
+        console.log("modifyScopes");
+
+        return this.post("http://localhost:3000/api/groups/" + id + "/scopes/", scopes);
     }
 }

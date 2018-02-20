@@ -19,6 +19,9 @@ import { GroupsComponent } from './group/components/groups.component';
 import { ScopeService } from './scope/services/scope.service';
 import { GroupService } from './group/services/group.service';
 import { LoaderComponent } from './shared/components/loader.component';
+import { EditGroupComponent } from './group/components/edit-group.component';
+import { EditUserGroupComponent } from './user/components/edit-user-group.component';
+import { EditUserScopeComponent } from './user/components/edit-user-scope.component';
 
 @NgModule({
     declarations: [
@@ -30,7 +33,10 @@ import { LoaderComponent } from './shared/components/loader.component';
         GroupComponent,
         GroupsComponent,
         ModalComponent,
-        LoaderComponent
+        LoaderComponent,
+        EditGroupComponent,
+        EditUserGroupComponent,
+        EditUserScopeComponent
     ],
     imports: [
         BrowserModule, 

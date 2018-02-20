@@ -42,6 +42,16 @@ router.get('/:id/scopes', function (req, res, next) {
     });
 });
 
+// get user's scopes by user id (including groups)
+router.get('/:id/scopes/full', function (req, res, next) {
+    sequelize.query(
+        'select distinct s.name from user_group ug join "group" g on g.id = ug.group_id join group_scope gs on ug.group_id = gs.group_id join scope s on gs.scope_id = s.id and ug.user_id = ?;',
+        { raw: true, replacements: [ req.params.id ]}
+    ).then(scopes => {
+        scopes ? res.send(scopes[0]) : [];
+    });
+});
+
 // add group to user
 router.post('/:id/groups/:group_id', function (req, res, next) {
     sequelize.query(
@@ -78,6 +88,46 @@ router.put('/scopes/:id', function (req, res, next) {
         'update user_scopes set active = false, updated_time = now() where id = ?;',
         { raw: true, replacements: [ req.params.id ]}
     ).then(data => {
+        res.send(data);
+    });
+});
+
+// modify groups
+router.post('/:id/groups', function (req, res, next) {
+    console.log(req.body);
+
+    let groups = "{";
+    for (let i = 0; i < req.body.length; i++){
+        groups += req.body[i] + ",";
+    }
+
+    groups = groups.substring(0, groups.length - 1) + "}";
+
+    sequelize.query(
+        "SELECT * FROM modifyUserGroups(?, ?);",
+        { raw: true, replacements: [ req.params.id, groups ]}
+    ).then(data => {
+        console.log(data);
+        res.send(data);
+    });
+});
+
+// modify scopes
+router.post('/:id/scopes', function (req, res, next) {
+    console.log(req.body);
+
+    let scopes = "{";
+    for (let i = 0; i < req.body.length; i++){
+        scopes += req.body[i] + ",";
+    }
+
+    scopes = scopes.substring(0, scopes.length - 1) + "}";
+
+    sequelize.query(
+        "SELECT * FROM modifyUserScopes(?, ?);",
+        { raw: true, replacements: [ req.params.id, scopes ]}
+    ).then(data => {
+        console.log(data);
         res.send(data);
     });
 });

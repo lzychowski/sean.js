@@ -49,6 +49,7 @@ export class UserComponent extends BaseComponent implements AfterViewInit {
     public scopes: Array<any>;
     private routeSub: any;
     private modal: boolean = false;
+    private loaded: boolean = false;
     private objectToRemove: any = {
         type: null,
         obj: {}
@@ -82,6 +83,7 @@ export class UserComponent extends BaseComponent implements AfterViewInit {
             this.user = data;
             setTimeout(() => {
                 setup_widgets_desktop();
+                this.loaded = true;
             });
         }).catch((e) => {
 

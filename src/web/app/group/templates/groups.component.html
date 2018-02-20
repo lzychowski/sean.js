@@ -38,11 +38,13 @@
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
+                                                <th></th>
                                                 <th>Name</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr *ngFor="let group of groups;">
+                                                <td style="text-align: center;"><a href="#/groups/{{ group.id }}"> <i class="fa fa-edit" title="Edit group"></i></a>  </td>
                                                 <td>{{ group.name }}</td>
                                             </tr>
                                         </tbody>
