@@ -116,7 +116,7 @@ router.put('/groups/:id', function (req, res, next) {
 // unassign scope from a user
 router.put('/scopes/:id', function (req, res, next) {
     sequelize.query(
-        'update user_scopes set active = false, updated_time = now() where id = ?;',
+        'update user_scope set active = false, updated_time = now() where id = ?;',
         { raw: true, replacements: [ req.params.id ]}
     )
     .then(data => {
